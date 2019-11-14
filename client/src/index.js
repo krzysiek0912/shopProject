@@ -19,7 +19,7 @@ const App = () => {
       <BrowserRouter>
         <MainLayout>
           <Switch>
-            <Route exact path="/" component={Root} />
+            <Route exact path="/" component={Home} />
             <Route exact path="/home" component={Home} />
             <Route exact path="/user" component={User} />
             <Route component={NoMatch} />

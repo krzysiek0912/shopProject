@@ -15,9 +15,6 @@ const Nav = styled.nav`
   &.navbar {
     padding: 0;
   }
-  .container {
-    padding: 0;
-  }
 `;
 
 const Header = () => {

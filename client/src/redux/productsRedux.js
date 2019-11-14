@@ -18,7 +18,7 @@ const initialState = {
   ],
   productsInCard: {},
   amount: 6,
-  postsPerPage: 10,
+  postsPerPage: 6,
   presentPage: 1,
 };
 

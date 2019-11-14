@@ -12,10 +12,10 @@ const ListLink = styled.ul`
     font-family: 'PT Sans', sans-serif;
     text-transform: uppercase;
 
-    padding: ${props => (props.padding ? props.padding : '0 18px')};
+    padding: ${props => (props.padding ? props.padding : '0 17.8px;')};
     color: #000000;
     opacity: 0.5;
-    letter-spacing: 6px;
+    letter-spacing: 6.2px;
     &:hover {
       color: #000000;
       opacity: 1;
