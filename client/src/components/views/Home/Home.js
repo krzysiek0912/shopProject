@@ -1,6 +1,7 @@
 import React from 'react';
 import SectionTitle from 'components/common/SectionTitle/SectionTitle';
 import SortingList from 'components/features/SortingList/SortingList';
+import ProductList from 'components/features/ProductsList/ProductsListContainer';
 
 const Home = () => {
   return (
@@ -10,7 +11,9 @@ const Home = () => {
           <SectionTitle>Sortuj:</SectionTitle>
           <SortingList />
         </div>
-        <div className="col-9">lista produktów</div>
+        <div className="col-9">
+          <ProductList />
+        </div>
       </div>
     </div>
   );
