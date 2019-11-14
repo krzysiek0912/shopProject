@@ -1,24 +1,35 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-// import styled from 'styled-components';
+
+import Logo from 'components/common/Logo/Logo';
+import BootstrapMenu from 'components/common/BootstrapMenu/BootstrapMenu';
+import styled from 'styled-components';
 // import './header.css';
+const links = [
+  { id: 1, path: '/', title: 'Home' },
+  { id: 2, path: '/faq', title: 'Faq' },
+  { id: 3, path: '/regulations', title: 'Regulamin' },
+  { id: 4, path: '/contact', title: 'Kontakt' },
+];
+
+const Nav = styled.nav`
+  &.navbar {
+    padding: 0;
+  }
+  .container {
+    padding: 0;
+  }
+`;
 
 const Header = () => {
   return (
-    <div>
-      <nav>
-        <div>Navbar</div>
-        <NavLink exact to="/" activeClassName="active">
-          Root
-        </NavLink>
-        <NavLink exact to="/home" activeClassName="active">
-          Home
-        </NavLink>
-        <NavLink exact to="/user" activeClassName="active">
-          User
-        </NavLink>
-      </nav>
-    </div>
+    <>
+      <Nav className="navbar navbar-expand-lg">
+        <div className="container">
+          <Logo />
+          <BootstrapMenu links={links} />
+        </div>
+      </Nav>
+    </>
   );
 };
 

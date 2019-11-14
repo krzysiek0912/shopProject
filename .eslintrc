@@ -12,8 +12,10 @@
         "extensions": [".js"]
       }
     ],
-    "react/prop-types": [2, { "ignore": ["children"] }],
-    "no-underscore-dangle": 1
+    "react/prop-types": [1, { "ignore": ["children"] }],
+    "no-underscore-dangle": 1,
+    "no-unused-vars": 1,
+    "react/jsx-props-no-spreading": 0
   },
   "settings": {
     "import/resolver": {
