@@ -1,3 +1,7 @@
+import axios from 'axios';
+import { API_URL } from 'config';
+import { startRequest, endRequest, errorRequest } from './requestRedux';
+
 /* SELECTORS */
 export const getProducts = ({ products }) => products.data;
 export const getProductsSort = ({ products, sorting }) => {
@@ -18,60 +22,24 @@ const createActionName = name => `app/${reducerName}/${name}`;
 export const LOAD_PRODUCTS = createActionName('LOAD_PRODUCTS');
 
 /* ACTIONS */
+export const loadProducts = payload => ({ payload, type: LOAD_PRODUCTS });
+
+/* THUNKS */
+export const loadProductsRequest = () => {
+  return async dispatch => {
+    dispatch(startRequest('requestProducts'));
+    try {
+      const res = await axios.get(`${API_URL}/products`);
+      dispatch(loadProducts(res.data));
+      dispatch(endRequest('requestProducts'));
+    } catch (e) {
+      dispatch(errorRequest(e.message, 'requestProducts'));
+    }
+  };
+};
 
 const initialState = {
-  data: [
-    {
-      _id: 'asdasad',
-      img: '/assets/shoes.jpg',
-      category: 'Sporting Goods',
-      price: 69.0,
-      label: 'Nowość',
-      stocked: true,
-      name: 'ZProdukt 1',
-    },
-    {
-      _id: 'adsada',
-      img: '/assets/glasses.jpg',
-      category: 'Sporting Goods',
-      price: 159.0,
-      label: 'Ostatnia Sztuka',
-      stocked: true,
-      name: 'AProdukt 2',
-    },
-    {
-      _id: 'asda',
-      img: '/assets/notes.jpg',
-      category: 'Sporting Goods',
-      price: 215.0,
-      stocked: false,
-      name: 'Produkt 3',
-    },
-    {
-      _id: 'adsdaaa',
-      img: '/assets/gamepad.jpg',
-      category: 'Electronics',
-      price: 59.0,
-      stocked: true,
-      name: 'Produkt 4',
-    },
-    {
-      _id: '5asad',
-      img: '/assets/notes.jpg',
-      category: 'Electronics',
-      price: 399.0,
-      stocked: false,
-      name: 'Produkt 5',
-    },
-    {
-      _id: '6asda',
-      img: '/assets/shoes.jpg',
-      category: 'Electronics',
-      price: 199.99,
-      stocked: true,
-      name: 'Produkt 6',
-    },
-  ],
+  data: [],
   singleProduct: {},
   currency: '$',
   postsPerPage: 6,
