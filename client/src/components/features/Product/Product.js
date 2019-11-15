@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+
 import ProductTitle from 'components/common/ProductTitle/ProductTitle';
 
 const ProductContainer = styled.div`
@@ -36,14 +38,16 @@ const ProductPrice = styled.div`
 
 const Product = ({ product }) => (
   <HalfColumn className="col-6">
-    <ProductContainer>
-      {product.label !== '' && <ProductLabel>{product.label}</ProductLabel>}
-      <ProductImage src={process.env.PUBLIC_URL + product.img} alt={product.name} />
-      <ProductInfo>
-        <ProductTitle>{product.name}</ProductTitle>
-        <ProductPrice>{product.price}</ProductPrice>
-      </ProductInfo>
-    </ProductContainer>
+    <Link to={`/product/${product.id}`}>
+      <ProductContainer>
+        {product.label !== '' && <ProductLabel>{product.label}</ProductLabel>}
+        <ProductImage src={process.env.PUBLIC_URL + product.img} alt={product.name} />
+        <ProductInfo>
+          <ProductTitle>{product.name}</ProductTitle>
+          <ProductPrice>{product.price}</ProductPrice>
+        </ProductInfo>
+      </ProductContainer>
+    </Link>
   </HalfColumn>
 );
 
