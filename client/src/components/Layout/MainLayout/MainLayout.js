@@ -5,13 +5,11 @@ import styled from 'styled-components';
 const MainDiv = styled.div`
   padding-top: 158px;
 `;
-const MainLayout = ({ children }) => {
-  return (
-    <div className="container">
-      <Header />
-      <MainDiv>{children}</MainDiv>
-    </div>
-  );
-};
+const MainLayout = ({ children }) => (
+  <div className="container">
+    <Header />
+    <MainDiv>{children}</MainDiv>
+  </div>
+);
 
 export default MainLayout;

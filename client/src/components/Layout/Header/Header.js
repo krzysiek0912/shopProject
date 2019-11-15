@@ -17,17 +17,15 @@ const Nav = styled.nav`
   }
 `;
 
-const Header = () => {
-  return (
-    <>
-      <Nav className="navbar navbar-expand-lg">
-        <div className="container">
-          <Logo />
-          <BootstrapMenu links={links} />
-        </div>
-      </Nav>
-    </>
-  );
-};
+const Header = () => (
+  <>
+    <Nav className="navbar navbar-expand-lg">
+      <div className="container">
+        <Logo />
+        <BootstrapMenu links={links} />
+      </div>
+    </Nav>
+  </>
+);
 
 export default Header;

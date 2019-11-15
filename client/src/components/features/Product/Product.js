@@ -1,8 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
+import { getCurrency } from 'redux/productsRedux';
 import ProductTitle from 'components/common/ProductTitle/ProductTitle';
 
 const ProductContainer = styled.div`
@@ -36,29 +38,42 @@ const ProductPrice = styled.div`
   opacity: 0.7;
 `;
 
-const Product = ({ product }) => (
+const Product = ({ currency, product }) => (
   <HalfColumn className="col-6">
-    <Link to={`/product/${product.id}`}>
+    <Link to={`/product/${product._id}`}>
       <ProductContainer>
         {product.label !== '' && <ProductLabel>{product.label}</ProductLabel>}
         <ProductImage src={process.env.PUBLIC_URL + product.img} alt={product.name} />
         <ProductInfo>
           <ProductTitle>{product.name}</ProductTitle>
-          <ProductPrice>{product.price}</ProductPrice>
+          <ProductPrice>
+            {currency}
+            {product.price}
+          </ProductPrice>
         </ProductInfo>
       </ProductContainer>
     </Link>
   </HalfColumn>
 );
 
+Product.defaultProps = {
+  currency: '$',
+};
+
 Product.propTypes = {
+  currency: PropTypes.string,
   product: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    _id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     label: PropTypes.string,
     img: PropTypes.string.isRequired,
     category: PropTypes.string.isRequired,
-    price: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
   }).isRequired,
 };
-export default Product;
+
+const mapStateToProps = state => ({
+  currency: getCurrency(state),
+});
+
+export default connect(mapStateToProps)(Product);

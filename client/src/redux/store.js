@@ -3,10 +3,12 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 
 // import reducers
 import products from 'redux/productsRedux';
+import sorting from 'redux/sortingRedux';
 
 // combine reducers
 const rootReducer = combineReducers({
   products,
+  sorting,
 });
 
 // create store

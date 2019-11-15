@@ -1,5 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
+
+import { getSortOptions, setSortOptions } from 'redux/sortingRedux';
 import 'globalstyle/__varible.scss';
 
 const List = styled.ul`
@@ -20,13 +24,28 @@ const ListItem = styled.li`
   }
 `;
 
-const SortingList = () => (
+const SortingList = ({ changeSorting }) => (
   <List>
-    <ListItem>Nazwa A-Z</ListItem>
-    <ListItem>Nazwa Z-A</ListItem>
-    <ListItem>Cena rosnąco</ListItem>
-    <ListItem>Cena malejąco</ListItem>
+    <ListItem onClick={() => changeSorting('name', 'asc')}>Nazwa A-Z</ListItem>
+    <ListItem onClick={() => changeSorting('name', 'desc')}>Nazwa Z-A</ListItem>
+    <ListItem onClick={() => changeSorting('price', 'asc')}>Cena rosnąco</ListItem>
+    <ListItem onClick={() => changeSorting('price', 'desc')}>Cena malejąco</ListItem>
   </List>
 );
 
-export default SortingList;
+SortingList.propTypes = {
+  changeSorting: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = state => ({
+  sorting: getSortOptions(state),
+});
+
+const mapDispatchToProps = dispatch => ({
+  changeSorting: (key, direction) => dispatch(setSortOptions({ key, direction })),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(SortingList);

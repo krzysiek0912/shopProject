@@ -1,67 +1,79 @@
 /* SELECTORS */
-export const getProducts = ({ products }) => products.products;
+export const getProducts = ({ products }) => products.data;
+export const getProductsSort = ({ products, sorting }) => {
+  const sortedProducts = [...products.data].sort((a, b) => {
+    if (a[sorting.key] > b[sorting.key]) return sorting.direction === 'asc' ? 1 : -1;
+    if (a[sorting.key] < b[sorting.key]) return sorting.direction === 'asc' ? -1 : 1;
+    return 0;
+  });
+  return sortedProducts;
+};
+
+export const getCurrency = ({ products }) => products.curency;
+
 // action name creator
 const reducerName = 'products';
 const createActionName = name => `app/${reducerName}/${name}`;
 
-/* ACTIONS */
 export const LOAD_PRODUCTS = createActionName('LOAD_PRODUCTS');
 
+/* ACTIONS */
+
 const initialState = {
-  products: [
+  data: [
     {
-      id: 1,
+      _id: 'asdasad',
       img: '/assets/shoes.jpg',
       category: 'Sporting Goods',
-      price: '$69.00',
+      price: 69.0,
       label: 'Nowość',
       stocked: true,
-      name: 'Produkt 1',
+      name: 'ZProdukt 1',
     },
     {
-      id: 2,
+      _id: 'adsada',
       img: '/assets/glasses.jpg',
       category: 'Sporting Goods',
-      price: '$159.00',
+      price: 159.0,
       label: 'Ostatnia Sztuka',
       stocked: true,
-      name: 'Produkt 2',
+      name: 'AProdukt 2',
     },
     {
-      id: 3,
+      _id: 'asda',
       img: '/assets/notes.jpg',
       category: 'Sporting Goods',
-      price: '$215.00',
+      price: 215.0,
       stocked: false,
       name: 'Produkt 3',
     },
     {
-      id: 4,
+      _id: 'adsdaaa',
       img: '/assets/gamepad.jpg',
       category: 'Electronics',
-      price: '$59.00',
+      price: 59.0,
       stocked: true,
       name: 'Produkt 4',
     },
     {
-      id: 5,
+      _id: '5asad',
       img: '/assets/notes.jpg',
       category: 'Electronics',
-      price: '$399.00',
+      price: 399.0,
       stocked: false,
       name: 'Produkt 5',
     },
     {
-      id: 6,
+      _id: '6asda',
       img: '/assets/shoes.jpg',
       category: 'Electronics',
-      price: '$199.99',
+      price: 199.99,
       stocked: true,
       name: 'Produkt 6',
     },
   ],
-  productsInCard: {},
-  amount: 6,
+  singleProduct: {},
+  currency: '$',
   postsPerPage: 6,
   presentPage: 1,
 };
