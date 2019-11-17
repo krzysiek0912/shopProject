@@ -1,20 +1,23 @@
 import React from 'react';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import SectionTitle from 'components/common/SectionTitle/SectionTitle';
 import SortingList from 'components/features/SortingList/SortingList';
 import ProductList from 'components/features/ProductsList/ProductsList';
 
 const Home = () => (
-  <div className="container">
-    <div className="row">
-      <div className="col-3">
+  <Container>
+    <Row>
+      <Col lg={3}>
         <SectionTitle>Sortuj:</SectionTitle>
         <SortingList />
-      </div>
-      <div className="col-9">
+      </Col>
+      <Col lg={9}>
         <ProductList />
-      </div>
-    </div>
-  </div>
+      </Col>
+    </Row>
+  </Container>
 );
 
 export default Home;

@@ -1,9 +1,9 @@
 import React from 'react';
+import Container from 'react-bootstrap/Container';
 import { LINKS } from 'config';
 import Logo from 'components/common/Logo/Logo';
 import BootstrapMenu from 'components/common/BootstrapMenu/BootstrapMenu';
 import styled from 'styled-components';
-// import './header.css';
 
 const Nav = styled.nav`
   &.navbar {
@@ -14,10 +14,10 @@ const Nav = styled.nav`
 const Header = () => (
   <>
     <Nav className="navbar navbar-expand-lg">
-      <div className="container">
+      <Container>
         <Logo />
         <BootstrapMenu links={LINKS} />
-      </div>
+      </Container>
     </Nav>
   </>
 );

@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import styled from 'styled-components';
+import Row from 'react-bootstrap/Row';
 
 import { getProductsSort, loadProductsRequest } from 'redux/productsRedux';
 import Product from 'components/features/Product/Product';
@@ -9,6 +10,7 @@ import Product from 'components/features/Product/Product';
 const ContainerProducts = styled.div`
   padding-left: 55px;
 `;
+
 class ProductsList extends React.Component {
   componentDidMount() {
     const { loadProducts } = this.props;
@@ -20,11 +22,11 @@ class ProductsList extends React.Component {
     const { products } = this.props;
     return (
       <ContainerProducts>
-        <section className="row">
+        <Row>
           {products.map(product => (
             <Product key={product._id} product={product} />
           ))}
-        </section>
+        </Row>
       </ContainerProducts>
     );
   }

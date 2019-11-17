@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import Col from 'react-bootstrap/Col';
 
 import { getCurrency } from 'redux/productsRedux';
 import ProductTitle from 'components/common/ProductTitle/ProductTitle';
@@ -39,7 +40,7 @@ const ProductPrice = styled.div`
 `;
 
 const Product = ({ currency, product }) => (
-  <HalfColumn className="col-6">
+  <Col sm={6} as={HalfColumn}>
     <Link to={`/product/${product._id}`}>
       <ProductContainer>
         {product.label !== '' && <ProductLabel>{product.label}</ProductLabel>}
@@ -53,7 +54,7 @@ const Product = ({ currency, product }) => (
         </ProductInfo>
       </ProductContainer>
     </Link>
-  </HalfColumn>
+  </Col>
 );
 
 Product.defaultProps = {
