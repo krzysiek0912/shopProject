@@ -2,6 +2,40 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Pagination from 'react-bootstrap/Pagination';
 import PageItem from 'react-bootstrap/PageItem';
+import styled from 'styled-components';
+import { IonIcon, addIcons } from 'react-svg-ionicons';
+import bundle from 'react-svg-ionicons/bundles/all';
+
+addIcons(bundle);
+
+const PaginationStyled = styled(Pagination)`
+  justify-content: right;
+  font-size: 24px;
+  margin-top: 25px;
+
+  .page-item span.page-link {
+    color: black;
+    background: none;
+    border: none;
+  }
+  .page-link {
+    border: none;
+    color: black;
+    opacity: 0.6;
+  }
+  .active .page-link {
+    opacity: 1;
+  }
+  svg {
+    font-size: 42px;
+    padding: 0;
+  }
+`;
+const PageItemArrow = styled(PageItem)`
+  a {
+    padding: 0;
+  }
+`;
 
 class PaginationContainer extends React.Component {
   constructor(props) {
@@ -38,11 +72,12 @@ class PaginationContainer extends React.Component {
       items.push(
         <PageItem
           onClick={() => {
-            this.changePage(number);
+            if (number !== presentPage) this.changePage(number);
           }}
           key={number}
           active={number === presentPage}
         >
+          {number < 10 && '0'}
           {number}
         </PageItem>,
       );
@@ -56,13 +91,21 @@ class PaginationContainer extends React.Component {
     const { changePageLeft, changePageRight } = this;
 
     return (
-      <div className="pagination">
+      <PaginationStyled>
         <Pagination>
-          {presentPage > 1 && <Pagination.Prev onClick={changePageLeft} />}
+          {presentPage > 1 && (
+            <PageItemArrow onClick={changePageLeft}>
+              <IonIcon name="arrow-round-back" sizes={42} />
+            </PageItemArrow>
+          )}
           {this.createPaginationList(pages)}
-          {presentPage < pages && <Pagination.Next onClick={changePageRight} />}
+          {presentPage < pages && (
+            <PageItemArrow onClick={changePageRight}>
+              <IonIcon name="arrow-round-forward" sizes={42} />
+            </PageItemArrow>
+          )}
         </Pagination>
-      </div>
+      </PaginationStyled>
     );
   }
 }

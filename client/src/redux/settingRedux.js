@@ -42,7 +42,7 @@ const initialState = {
   },
   currency: '$',
   pagination: {
-    productsPerPage: 2,
+    productsPerPage: 6,
     presentPage: 1,
   },
 };
