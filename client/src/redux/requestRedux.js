@@ -20,7 +20,13 @@ export const resetRequestObj = palyload => {
   };
 };
 
-const initialState = {};
+const initialState = {
+  products: {
+    success: false,
+    pending: false,
+    error: '',
+  },
+};
 
 export default function reducer(statePart = initialState, action = {}) {
   switch (action.type) {

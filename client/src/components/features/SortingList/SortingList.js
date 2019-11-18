@@ -3,7 +3,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-import { getSortOptions, setSortOptions } from 'redux/sortingRedux';
+import {
+  getSortingOptions,
+  setSortOptionsRequest,
+  getPages,
+  getProductsPerPage,
+} from 'redux/settingRedux';
 import 'globalstyle/__varible.scss';
 
 const List = styled.ul`
@@ -24,25 +29,37 @@ const ListItem = styled.li`
   }
 `;
 
-const SortingList = ({ changeSorting }) => (
+const SortingList = ({ changeSorting, productsPerPage }) => (
   <List>
-    <ListItem onClick={() => changeSorting('name', 'asc')}>Nazwa A-Z</ListItem>
-    <ListItem onClick={() => changeSorting('name', 'desc')}>Nazwa Z-A</ListItem>
-    <ListItem onClick={() => changeSorting('price', 'asc')}>Cena rosnąco</ListItem>
-    <ListItem onClick={() => changeSorting('price', 'desc')}>Cena malejąco</ListItem>
+    <ListItem onClick={() => changeSorting(productsPerPage, { key: 'name', direction: 'asc' })}>
+      Nazwa A-Z
+    </ListItem>
+    <ListItem onClick={() => changeSorting(productsPerPage, { key: 'name', direction: 'desc' })}>
+      Nazwa Z-A
+    </ListItem>
+    <ListItem onClick={() => changeSorting(productsPerPage, { key: 'price', direction: 'asc' })}>
+      Cena rosnąco
+    </ListItem>
+    <ListItem onClick={() => changeSorting(productsPerPage, { key: 'price', direction: 'desc' })}>
+      Cena malejąco
+    </ListItem>
   </List>
 );
 
 SortingList.propTypes = {
   changeSorting: PropTypes.func.isRequired,
+  productsPerPage: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = state => ({
-  sorting: getSortOptions(state),
+  sorting: getSortingOptions(state),
+  pages: getPages(state),
+  productsPerPage: getProductsPerPage(state),
 });
 
 const mapDispatchToProps = dispatch => ({
-  changeSorting: (key, direction) => dispatch(setSortOptions({ key, direction })),
+  changeSorting: (productsPerPage, sortingOption) =>
+    dispatch(setSortOptionsRequest(productsPerPage, sortingOption)),
 });
 
 export default connect(

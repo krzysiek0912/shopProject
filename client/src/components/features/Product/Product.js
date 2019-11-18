@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Col from 'react-bootstrap/Col';
 
-import { getCurrency } from 'redux/productsRedux';
+import { getCurrency } from 'redux/settingRedux';
 import ProductTitle from 'components/common/ProductTitle/ProductTitle';
 
 const ProductContainer = styled.div`

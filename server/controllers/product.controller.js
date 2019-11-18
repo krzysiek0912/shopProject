@@ -1,6 +1,6 @@
 const Product = require('../models/product.model');
 
-// get all posts
+// get all products
 exports.getProducts = async (req, res) => {
   try {
     res.status(200).json(await Product.find());
@@ -9,7 +9,37 @@ exports.getProducts = async (req, res) => {
   }
 };
 
-// get post
+// get products by range
+exports.getProductsByRange = async (req, res) => {
+  try {
+    let { startAt, limit } = req.params;
+    const { order, orderby } = req.params;
+    let direction;
+    direction = order === 'asc' ? (direction = 1) : (direction = -1);
+    let sortingOption = {};
+    if (orderby) {
+      sortingOption = {
+        [orderby]: direction,
+      };
+    }
+
+    startAt = parseInt(startAt, 10);
+    limit = parseInt(limit, 10);
+    const amount = await Product.countDocuments();
+    const products = await Product.find()
+      .skip(startAt)
+      .limit(limit)
+      .sort(sortingOption);
+    res.status(200).json({
+      products,
+      amount,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+
+// get product
 exports.getProduct = async (req, res) => {
   try {
     const singleProduct = await Product.findOne({ _id: req.params.id });
