@@ -2,8 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import Col from 'react-bootstrap/Col';
 
 import { getCurrency } from 'redux/settingRedux';
 import ProductTitle from 'components/common/ProductTitle/ProductTitle';
@@ -14,9 +12,7 @@ const ProductContainer = styled.div`
   padding: 50px 0;
   text-align: center;
 `;
-const HalfColumn = styled.div`
-  margin-bottom: 20px;
-`;
+
 const ProductLabel = styled.span`
   position: absolute;
   top: 20px;
@@ -39,23 +35,26 @@ const ProductPrice = styled.div`
   opacity: 0.7;
 `;
 
-const Product = ({ currency, product }) => (
-  <Col sm={6} as={HalfColumn}>
-    <Link to={`/product/${product._id}`}>
-      <ProductContainer>
-        {product.label !== '' && <ProductLabel>{product.label}</ProductLabel>}
-        <ProductImage src={process.env.PUBLIC_URL + product.img} alt={product.name} />
-        <ProductInfo>
-          <ProductTitle>{product.name}</ProductTitle>
-          <ProductPrice>
-            {currency}
-            {product.price}
-          </ProductPrice>
-        </ProductInfo>
-      </ProductContainer>
-    </Link>
-  </Col>
-);
+const Product = ({ currency, product }) => {
+  return (
+    <>
+      {product._id && (
+        <ProductContainer>
+          {product.label !== '' && <ProductLabel>{product.label}</ProductLabel>}
+          <ProductImage src={process.env.PUBLIC_URL + product.img} alt={product.name} />
+          <ProductInfo>
+            <ProductTitle>{product.name}</ProductTitle>
+            <ProductPrice>
+              {currency}
+              {product.price}
+            </ProductPrice>
+          </ProductInfo>
+        </ProductContainer>
+      )}
+      {!product._id && <div> Brak produktu</div>}
+    </>
+  );
+};
 
 Product.defaultProps = {
   currency: '$',

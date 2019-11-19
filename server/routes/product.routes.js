@@ -13,6 +13,6 @@ router
   .get(ProductController.getProductsByRange);
 
 // get one products
-router.route('/products/:id').get(ProductController.getProduct);
+router.route('/product/:id').get(ProductController.getProduct);
 
 module.exports = router;

@@ -5,7 +5,8 @@ import styled from 'styled-components';
 import Row from 'react-bootstrap/Row';
 import Spinner from 'react-bootstrap/Spinner';
 import Alert from 'react-bootstrap/Alert';
-
+import { Link } from 'react-router-dom';
+import Col from 'react-bootstrap/Col';
 import { getRequest } from 'redux/requestRedux';
 import { getProductsSort, loadProductsByPageRequest } from 'redux/productsRedux';
 import {
@@ -20,6 +21,9 @@ import Pagination from 'components/common/Pagination/Pagination';
 
 const ContainerProducts = styled.div`
   padding-left: 55px;
+`;
+const HalfColumn = styled.div`
+  margin-bottom: 20px;
 `;
 
 class ProductsList extends React.Component {
@@ -42,7 +46,14 @@ class ProductsList extends React.Component {
     return (
       <ContainerProducts>
         <Row>
-          {(success && products.map(product => <Product key={product._id} product={product} />)) ||
+          {(success &&
+            products.map(product => (
+              <Col key={product._id} sm={6} as={HalfColumn}>
+                <Link to={`/product/${product._id}`}>
+                  <Product product={product} />
+                </Link>
+              </Col>
+            ))) ||
             (pending && <Spinner animation="border" />) || (
               <Alert variant="danger"> {error} </Alert>
             )}

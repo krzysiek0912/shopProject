@@ -4,7 +4,7 @@ import { startRequest, endRequest, errorRequest } from './requestRedux';
 
 /* SELECTORS */
 export const getProducts = ({ products }) => products.data;
-
+export const getSingleProduct = ({ products }) => products.singleProduct;
 export const getProductsSort = ({ products, setting }) => {
   const { sorting } = setting;
   const sortedProducts = [...products.data].sort((a, b) => {
@@ -21,10 +21,12 @@ const createActionName = name => `app/${reducerName}/${name}`;
 
 export const LOAD_PRODUCTS = createActionName('LOAD_PRODUCTS');
 export const LOAD_PRODUCTS_PAGE = createActionName('LOAD_PRODUCTS_PAGE');
+export const LOAD_SINGLE_PRODUCT = createActionName('LOAD_SINGLE_PRODUCT');
 
 /* ACTIONS */
 export const loadProducts = payload => ({ payload, type: LOAD_PRODUCTS });
 export const loadProductsByPage = payload => ({ payload, type: LOAD_PRODUCTS_PAGE });
+export const loadSingleProduct = payload => ({ payload, type: LOAD_SINGLE_PRODUCT });
 
 /* THUNKS */
 export const loadProductsRequest = () => {
@@ -68,6 +70,19 @@ export const loadProductsByPageRequest = (page, productsPerPage, sortingOption) 
   };
 };
 
+export const loadSingleProductRequest = id => {
+  return async dispatch => {
+    dispatch(startRequest(reducerName));
+    try {
+      const res = await axios.get(`${API_URL}/product/${id}`);
+      dispatch(loadSingleProduct(res.data));
+      dispatch(endRequest(reducerName));
+    } catch (e) {
+      dispatch(errorRequest(e.message, reducerName));
+    }
+  };
+};
+
 const initialState = {
   data: [],
   singleProduct: {},
@@ -84,6 +99,8 @@ export default function reducer(statePart = initialState, action = {}) {
         data: [...action.payload.products],
         amount: action.payload.amount,
       };
+    case LOAD_SINGLE_PRODUCT:
+      return { ...statePart, singleProduct: action.payload };
     default:
       return statePart;
   }

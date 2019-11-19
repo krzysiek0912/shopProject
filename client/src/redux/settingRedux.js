@@ -3,7 +3,7 @@ import { loadProductsByPageRequest } from './productsRedux';
 
 /* SELECTORS */
 export const getSortingOptions = ({ setting }) => setting.sorting;
-export const getCurrency = ({ setting }) => setting.curency;
+export const getCurrency = ({ setting }) => setting.currency;
 export const getPages = ({ products, setting }) =>
   Math.ceil(products.amount / setting.pagination.productsPerPage);
 export const getCurentPages = ({ setting }) => setting.pagination.presentPage;
