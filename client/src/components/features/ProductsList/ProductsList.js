@@ -28,9 +28,9 @@ const HalfColumn = styled.div`
 
 class ProductsList extends React.Component {
   componentDidMount() {
-    const { loadProductsByPage, initialPage = 1, productsPerPage, sortingOptions } = this.props;
+    const { loadProductsByPage, presentPage = 1, productsPerPage, sortingOptions } = this.props;
 
-    loadProductsByPage(initialPage, productsPerPage, sortingOptions);
+    loadProductsByPage(presentPage, productsPerPage, sortingOptions);
   }
 
   loadProductsPage = page => {
@@ -67,9 +67,6 @@ class ProductsList extends React.Component {
   }
 }
 
-ProductsList.defaultProps = {
-  initialPage: 1,
-};
 ProductsList.propTypes = {
   loadProductsByPage: PropTypes.func.isRequired,
   setPage: PropTypes.func.isRequired,
@@ -82,7 +79,6 @@ ProductsList.propTypes = {
       price: PropTypes.number.isRequired,
     }),
   ).isRequired,
-  initialPage: PropTypes.number,
   sortingOptions: PropTypes.shape().isRequired,
   request: PropTypes.shape({
     products: PropTypes.shape({
