@@ -14,8 +14,7 @@ exports.getProductsByRange = async (req, res) => {
   try {
     let { startAt, limit } = req.params;
     const { order, orderby } = req.params;
-    let direction;
-    direction = order === 'asc' ? (direction = 1) : (direction = -1);
+    const direction = order === 'asc' ? 1 : -1;
     let sortingOption = {};
     if (orderby) {
       sortingOption = {
@@ -27,9 +26,9 @@ exports.getProductsByRange = async (req, res) => {
     limit = parseInt(limit, 10);
     const amount = await Product.countDocuments();
     const products = await Product.find()
+      .sort(sortingOption)
       .skip(startAt)
-      .limit(limit)
-      .sort(sortingOption);
+      .limit(limit);
     res.status(200).json({
       products,
       amount,
