@@ -1,11 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { IonIcon } from 'react-svg-ionicons';
 import { Link, withRouter } from 'react-router-dom';
 import styled from 'styled-components';
-
-const MainMenuDiv = styled.div`
-  margin-right: 43px;
-`;
 
 const ListLink = styled.ul`
   a {
@@ -24,7 +21,7 @@ const ListLink = styled.ul`
 `;
 
 const MainMenu = ({ links, location }) => (
-  <MainMenuDiv className="collapse navbar-collapse" id="navbarResponsive">
+  <div className="collapse navbar-collapse" id="navbarResponsive">
     <ListLink className="navbar-nav ml-auto">
       {links.map(link => (
         <li key={link.id}>
@@ -34,7 +31,10 @@ const MainMenu = ({ links, location }) => (
         </li>
       ))}
     </ListLink>
-  </MainMenuDiv>
+    <Link to="/cart">
+      <IonIcon name="cart" size="large" strokeWidth={3} />
+    </Link>
+  </div>
 );
 
 MainMenu.propTypes = {

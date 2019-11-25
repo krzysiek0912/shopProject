@@ -6,12 +6,14 @@ import Spinner from 'react-bootstrap/Spinner';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
+import Button from 'react-bootstrap/Button';
 import styled from 'styled-components';
 
 import NoMatch from 'components/views/NoMatch/NoMatch';
 import ProductTitle from 'components/common/ProductTitle/ProductTitle';
 import HtmlBox from 'components/common/HtmlBox/HtmlBox';
 import { getSingleProduct, loadSingleProductRequest } from 'redux/productsRedux';
+import { getCartList, addProductToCart, removeProductFromCart } from 'redux/cartRedux';
 import { getCurrency } from 'redux/settingRedux';
 import { getRequest } from 'redux/requestRedux';
 
@@ -41,14 +43,52 @@ const ProductPrice = styled.div`
 `;
 
 class SingleProduct extends React.Component {
+  state = {
+    inCart: false,
+  };
+
   componentDidMount() {
-    const { loadSingleProduct, id } = this.props;
+    const { loadSingleProduct, id, cartList } = this.props;
     loadSingleProduct(id);
+    const result = cartList.find(product => product.id === id);
+    if (result) {
+      this.setState({
+        inCart: true,
+      });
+    }
   }
 
+  handlerAddToCart = () => {
+    const { addToCart, singleProduct } = this.props;
+    const cartItem = {
+      productId: singleProduct._id,
+      productPrice: singleProduct.price,
+      count: 1,
+    };
+
+    addToCart(cartItem);
+
+    this.setState({
+      inCart: true,
+    });
+  };
+
+  handlerRemoveFromCart = () => {
+    const { removeFromCart, singleProduct } = this.props;
+
+    removeFromCart(singleProduct._id);
+
+    this.setState({
+      inCart: false,
+    });
+  };
+
   render() {
+    const { handlerAddToCart, handlerRemoveFromCart } = this;
     const { singleProduct, request, currency } = this.props;
+    const { inCart } = this.state;
     const { pending } = request.products;
+
     return (
       <div>
         {(pending && <Spinner />) ||
@@ -73,6 +113,15 @@ class SingleProduct extends React.Component {
                       {currency}
                       {singleProduct.price}
                       <HtmlBox>{singleProduct.content}</HtmlBox>
+                      {(!inCart && (
+                        <Button onClick={handlerAddToCart} variant="dark">
+                          Dodaj do koszyka
+                        </Button>
+                      )) || (
+                        <Button onClick={handlerRemoveFromCart} variant="warning">
+                          Usuń z koszyka
+                        </Button>
+                      )}
                     </ProductPrice>
                   </ProductInfo>
                 </Col>
@@ -84,8 +133,13 @@ class SingleProduct extends React.Component {
   }
 }
 
+SingleProduct.defaultProps = {
+  cartList: [],
+};
 SingleProduct.propTypes = {
+  removeFromCart: PropTypes.func.isRequired,
   loadSingleProduct: PropTypes.func.isRequired,
+  addToCart: PropTypes.func.isRequired,
   singleProduct: PropTypes.arrayOf(
     PropTypes.shape({
       _id: PropTypes.string.isRequired,
@@ -104,15 +158,24 @@ SingleProduct.propTypes = {
   }).isRequired,
   id: PropTypes.string.isRequired,
   currency: PropTypes.string.isRequired,
+  cartList: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      count: PropTypes.number,
+    }),
+  ),
 };
 
 const mapStateToProps = state => ({
   singleProduct: getSingleProduct(state),
+  cartList: getCartList(state),
   currency: getCurrency(state),
   request: getRequest(state),
 });
 
 const mapDispatchToProps = dispatch => ({
+  addToCart: id => dispatch(addProductToCart(id)),
+  removeFromCart: id => dispatch(removeProductFromCart(id)),
   loadSingleProduct: id => dispatch(loadSingleProductRequest(id)),
 });
 
