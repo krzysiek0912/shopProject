@@ -54,9 +54,11 @@ class ProductsList extends React.Component {
                 </Link>
               </Col>
             ))) ||
-            (pending && <Spinner animation="border" />) || (
-              <Alert variant="danger"> {error} </Alert>
-            )}
+            (pending && (
+              <Col>
+                <Spinner animation="border" />
+              </Col>
+            )) || <Alert variant="danger"> {error} </Alert>}
         </Row>
 
         {success && pages > 1 && (

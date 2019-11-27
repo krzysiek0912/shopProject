@@ -7,16 +7,15 @@ import { API_URL } from 'config';
 
 import CartItem from 'components/features/CartItem/CartItem';
 import { getCartList, getArrayOfIds } from 'redux/cartRedux';
+import { getCurrency } from 'redux/settingRedux';
 
-const CartList = ({ cartList }) => {
+const CartList = ({ cartIdList, cartList, currency }) => {
   const [cart, setCartData] = useState({ items: [] });
   const [isFetching, setFetching] = useState(false);
+
   useEffect(() => {
     const fetchProducts = async () => {
       setFetching(true);
-      const cartIdList = cartList.map(currentValue => {
-        return currentValue._id;
-      });
       await axios
         .get(`${API_URL}/cart`, {
           params: {
@@ -33,13 +32,14 @@ const CartList = ({ cartList }) => {
         });
     };
     fetchProducts();
-  }, [cartList]);
+  }, [cartIdList]);
 
   const ItemsList = cart.items.map(item => {
-    const { count } = cartList.find(product => product._id === item._id);
+    const curentProduct = cartList.find(product => product._id === item._id);
+    const count = curentProduct ? curentProduct.count : 1;
     const cartProduct = { ...item, count };
 
-    return <CartItem key={item._id} item={cartProduct} />;
+    return <CartItem key={item._id} item={cartProduct} currency={currency} />;
   });
 
   return (
@@ -57,9 +57,12 @@ CartList.propTypes = {
       count: PropTypes.number,
     }),
   ).isRequired,
+  cartIdList: PropTypes.arrayOf(PropTypes.string).isRequired,
+  currency: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({
+  currency: getCurrency(state),
   cartList: getCartList(state),
   cartIdList: getArrayOfIds(state),
 });

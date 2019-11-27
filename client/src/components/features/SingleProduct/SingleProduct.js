@@ -134,15 +134,15 @@ SingleProduct.propTypes = {
   removeFromCart: PropTypes.func.isRequired,
   loadSingleProduct: PropTypes.func.isRequired,
   addToCart: PropTypes.func.isRequired,
-  singleProduct: PropTypes.arrayOf(
-    PropTypes.shape({
-      _id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      img: PropTypes.string.isRequired,
-      category: PropTypes.string.isRequired,
-      price: PropTypes.number.isRequired,
-    }),
-  ).isRequired,
+  singleProduct: PropTypes.shape({
+    _id: PropTypes.string,
+    name: PropTypes.string,
+    content: PropTypes.string,
+    img: PropTypes.string,
+    category: PropTypes.string,
+    label: PropTypes.string,
+    price: PropTypes.number,
+  }).isRequired,
   request: PropTypes.shape({
     products: PropTypes.shape({
       success: PropTypes.bool,
