@@ -8,7 +8,6 @@ import request from 'redux/requestRedux';
 import setting from 'redux/settingRedux';
 
 const localStorageMiddleware = ({ getState }) => {
-  // <--- FOCUS HERE
   return next => action => {
     const result = next(action);
     localStorage.setItem('cart', JSON.stringify(getState().cart.cartList));

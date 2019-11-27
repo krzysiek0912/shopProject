@@ -1,5 +1,11 @@
 import React from 'react';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
-const NoMatch = () => <div>NoMatch</div>;
+const NoMatch = () => (
+  <Row>
+    <Col>NoMatch</Col>
+  </Row>
+);
 
 export default NoMatch;

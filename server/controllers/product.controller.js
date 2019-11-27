@@ -47,3 +47,15 @@ exports.getProduct = async (req, res) => {
     res.status(500).json(err);
   }
 };
+
+// get cart by ids
+exports.getCartByIds = async (req, res) => {
+  try {
+    const cartProduct = await Product.find({
+      _id: { $in: req.query.productsIdList },
+    });
+    res.status(200).json(cartProduct);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};

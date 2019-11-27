@@ -15,4 +15,7 @@ router
 // get one products
 router.route('/product/:id').get(ProductController.getProduct);
 
+// get cart
+router.route('/cart').get(ProductController.getCartByIds);
+
 module.exports = router;

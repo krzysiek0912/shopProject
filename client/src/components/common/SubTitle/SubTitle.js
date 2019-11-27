@@ -5,18 +5,18 @@ import 'globalstyle/__varible.scss';
 
 const TitleH2 = styled.h2`
   margin: $base-size 0;
-  font-size: 32px;
+  font-size: 25px;
   font-weight: normal;
   position: relative;
   color: $color-text;
-  padding-bottom: 50px;
+  padding-bottom: 10px;
   letter-spacing: 0.9px;
 `;
 
-const SectionTitle = ({ children }) => <TitleH2>{children}</TitleH2>;
+const SubTitle = ({ children }) => <TitleH2>{children}</TitleH2>;
 
-SectionTitle.propTypes = {
+SubTitle.propTypes = {
   children: PropTypes.string.isRequired,
 };
 
-export default SectionTitle;
+export default SubTitle;

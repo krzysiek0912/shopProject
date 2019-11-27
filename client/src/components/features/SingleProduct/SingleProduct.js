@@ -5,12 +5,11 @@ import { withRouter } from 'react-router-dom';
 import Spinner from 'react-bootstrap/Spinner';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import styled from 'styled-components';
 
 import NoMatch from 'components/views/NoMatch/NoMatch';
-import ProductTitle from 'components/common/ProductTitle/ProductTitle';
+import SubTitle from 'components/common/SubTitle/SubTitle';
 import HtmlBox from 'components/common/HtmlBox/HtmlBox';
 import { getSingleProduct, loadSingleProductRequest } from 'redux/productsRedux';
 import { getCartList, addProductToCart, removeProductFromCart } from 'redux/cartRedux';
@@ -50,7 +49,7 @@ class SingleProduct extends React.Component {
   componentDidMount() {
     const { loadSingleProduct, id, cartList } = this.props;
     loadSingleProduct(id);
-    const result = cartList.find(product => product.id === id);
+    const result = cartList.find(product => product._id === id);
     if (result) {
       this.setState({
         inCart: true,
@@ -61,8 +60,7 @@ class SingleProduct extends React.Component {
   handlerAddToCart = () => {
     const { addToCart, singleProduct } = this.props;
     const cartItem = {
-      productId: singleProduct._id,
-      productPrice: singleProduct.price,
+      product: singleProduct,
       count: 1,
     };
 
@@ -93,40 +91,36 @@ class SingleProduct extends React.Component {
       <div>
         {(pending && <Spinner />) ||
           (singleProduct._id && (
-            <Container>
-              <Row>
-                <Col xs={5}>
-                  <ProductImgContainer>
-                    {singleProduct.label !== '' && (
-                      <ProductLabel>{singleProduct.label}</ProductLabel>
+            <Row>
+              <Col xs={5}>
+                <ProductImgContainer>
+                  {singleProduct.label !== '' && <ProductLabel>{singleProduct.label}</ProductLabel>}
+                  <ProductImage
+                    src={process.env.PUBLIC_URL + singleProduct.img}
+                    alt={singleProduct.name}
+                  />
+                </ProductImgContainer>
+              </Col>
+              <Col xs={7}>
+                <ProductInfo>
+                  <SubTitle>{singleProduct.name}</SubTitle>
+                  <ProductPrice>
+                    {currency}
+                    {singleProduct.price}
+                    <HtmlBox>{singleProduct.content}</HtmlBox>
+                    {(!inCart && (
+                      <Button onClick={handlerAddToCart} variant="dark">
+                        Dodaj do koszyka
+                      </Button>
+                    )) || (
+                      <Button onClick={handlerRemoveFromCart} variant="warning">
+                        Usuń z koszyka
+                      </Button>
                     )}
-                    <ProductImage
-                      src={process.env.PUBLIC_URL + singleProduct.img}
-                      alt={singleProduct.name}
-                    />
-                  </ProductImgContainer>
-                </Col>
-                <Col xs={7}>
-                  <ProductInfo>
-                    <ProductTitle>{singleProduct.name}</ProductTitle>
-                    <ProductPrice>
-                      {currency}
-                      {singleProduct.price}
-                      <HtmlBox>{singleProduct.content}</HtmlBox>
-                      {(!inCart && (
-                        <Button onClick={handlerAddToCart} variant="dark">
-                          Dodaj do koszyka
-                        </Button>
-                      )) || (
-                        <Button onClick={handlerRemoveFromCart} variant="warning">
-                          Usuń z koszyka
-                        </Button>
-                      )}
-                    </ProductPrice>
-                  </ProductInfo>
-                </Col>
-              </Row>
-            </Container>
+                  </ProductPrice>
+                </ProductInfo>
+              </Col>
+            </Row>
           )) || <NoMatch />}
       </div>
     );

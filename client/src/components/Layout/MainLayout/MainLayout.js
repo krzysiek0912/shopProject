@@ -9,7 +9,9 @@ const MainDiv = styled.div`
 const MainLayout = ({ children }) => (
   <Container>
     <Header />
-    <MainDiv>{children}</MainDiv>
+    <MainDiv>
+      <Container>{children}</Container>
+    </MainDiv>
   </Container>
 );
 
