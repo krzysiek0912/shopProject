@@ -21,7 +21,7 @@ const StyledRow = styled(Row)`
   align-items: center;
 `;
 
-const CartItem = ({ item, count }) => {
+const CartItem = ({ item }) => {
   return (
     <StyledRow>
       <Col xs={2}>
@@ -35,7 +35,7 @@ const CartItem = ({ item, count }) => {
       </Col>
       <Col xs={1}>{item.price}</Col>
       <Col xs={2}>
-        +<input type="number" value={count} />- szt
+        +<input type="number" value={item.count} />- szt
       </Col>
     </StyledRow>
   );
@@ -48,8 +48,8 @@ CartItem.propTypes = {
     img: PropTypes.string,
     content: PropTypes.string,
     price: PropTypes.number,
+    count: PropTypes.number,
   }).isRequired,
-  count: PropTypes.number.isRequired,
 };
 const mapStateToProps = state => ({
   cartList: getCartList(state),
