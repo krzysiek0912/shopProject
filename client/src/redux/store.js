@@ -23,13 +23,16 @@ const rootReducer = combineReducers({
   setting,
 });
 
+const composeEnhancers =
+  typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+        // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
+      })
+    : compose;
 // create store
 const store = createStore(
   rootReducer,
-  compose(
-    applyMiddleware(thunk, localStorageMiddleware),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-  ),
+  composeEnhancers(applyMiddleware(thunk, localStorageMiddleware)),
 );
 
 export default store;
