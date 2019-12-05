@@ -8,7 +8,7 @@ import bundle from 'react-svg-ionicons/bundles/all';
 
 addIcons(bundle);
 
-const PaginationStyled = styled(Pagination)`
+const PaginationStyled = styled.div`
   justify-content: right;
   font-size: 24px;
   margin-top: 25px;

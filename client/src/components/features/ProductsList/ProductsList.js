@@ -19,7 +19,7 @@ import {
 import Product from 'components/features/Product/Product';
 import Pagination from 'components/common/Pagination/Pagination';
 
-const ContainerProducts = styled.div`
+const ContainerProducts = styled(Row)`
   padding-left: 55px;
 `;
 const HalfColumn = styled.div`
@@ -45,24 +45,28 @@ class ProductsList extends React.Component {
     const { success, pending, error } = request.products;
     return (
       <ContainerProducts>
-        <Row>
-          {(success &&
-            products.map(product => (
-              <Col key={product._id} sm={6} as={HalfColumn}>
-                <Link to={`/product/${product._id}`}>
-                  <Product product={product} />
-                </Link>
-              </Col>
-            ))) ||
-            (pending && (
-              <Col>
-                <Spinner animation="border" />
-              </Col>
-            )) || <Alert variant="danger"> {error} </Alert>}
-        </Row>
+        {(success &&
+          products.map(product => (
+            <Col key={product._id} sm={6} as={HalfColumn}>
+              <Link to={`/product/${product._id}`}>
+                <Product product={product} />
+              </Link>
+            </Col>
+          ))) ||
+          (pending && (
+            <Col>
+              <Spinner animation="border" />
+            </Col>
+          )) || (
+            <Col>
+              <Alert variant="danger"> {error} </Alert>
+            </Col>
+          )}
 
         {success && pages > 1 && (
-          <Pagination pages={pages} onPageChange={loadProductsPage} initialPage={presentPage} />
+          <Col>
+            <Pagination pages={pages} onPageChange={loadProductsPage} initialPage={presentPage} />
+          </Col>
         )}
       </ContainerProducts>
     );
