@@ -20,7 +20,7 @@ app.use(mongoSanitize());
 app.use('/api', ProductRoutes);
 
 // Serve static files from the React app
-// app.use(express.static(path.join(__dirname, '/../client/build')));
+app.use(express.static(path.join(__dirname, '/../client/build')));
 
 // connects our back end code with the database
 mongoose.connect(config.DB, {
@@ -36,9 +36,9 @@ db.once('open', () => {
 });
 db.on('error', err => console.log(`Error ${err}`));
 
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(`${__dirname}/../client/build/index.html`));
-// });
+app.get('*', (req, res) => {
+  res.sendFile(path.join(`${__dirname}/../client/build/index.html`));
+});
 
 app.listen(config.PORT, () => {
   console.log('Server is running on Port:', config.PORT);
