@@ -32,3 +32,11 @@ a:hover {
 .btn-dark {
   background: black;
 }
+
+.route-wrapper {
+  position: relative;
+}
+
+.route-wrapper > div {
+  position: absolute;
+}

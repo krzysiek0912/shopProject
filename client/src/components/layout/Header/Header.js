@@ -12,14 +12,12 @@ const Nav = styled.nav`
 `;
 
 const Header = () => (
-  <>
+  <Container>
     <Nav className="navbar navbar-expand-lg">
-      <Container>
-        <Logo />
-        <BootstrapMenu links={LINKS} />
-      </Container>
+      <Logo />
+      <BootstrapMenu links={LINKS} />
     </Nav>
-  </>
+  </Container>
 );
 
 export default Header;
