@@ -2,6 +2,16 @@
 export const getValue = ({ cart }) => cart.value;
 export const getCartList = ({ cart }) => cart.cartList;
 export const getArrayOfIds = ({ cart }) => cart.cartIds;
+export const getCartAmount = ({ cart }) => {
+  if (cart.cartList.length < 1) return 0;
+  return cart.cartList.length > 1
+    ? cart.cartList.reduce((previousValue, currentValue) => {
+        const prevAmount = previousValue.count * previousValue.price;
+        const curentAmount = currentValue.count * currentValue.price;
+        return prevAmount + curentAmount;
+      })
+    : cart.cartList[0].count * cart.cartList[0].price;
+};
 
 // action name creator
 const reducerName = 'cart';
@@ -23,10 +33,10 @@ const initialState = {
   cartIds: cart.map(currentValue => {
     return currentValue._id;
   }),
-  value: 0,
 };
-let curentCount = 0;
+
 export default function reducer(statePart = initialState, action = {}) {
+  let curentCount = 0;
   switch (action.type) {
     case ADD_TO_CART:
       if (statePart.cartList[action.payload.product._id]) {
@@ -39,6 +49,7 @@ export default function reducer(statePart = initialState, action = {}) {
           {
             _id: action.payload.product._id,
             count: curentCount + action.payload.count,
+            price: action.payload.price,
           },
         ],
         cartIds: [...statePart.cartIds, action.payload.product._id],

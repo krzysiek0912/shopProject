@@ -62,6 +62,7 @@ class SingleProduct extends React.Component {
     const cartItem = {
       product: singleProduct,
       count: 1,
+      price: singleProduct.price,
     };
 
     addToCart(cartItem);
@@ -168,7 +169,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  addToCart: id => dispatch(addProductToCart(id)),
+  addToCart: cartItem => dispatch(addProductToCart(cartItem)),
   removeFromCart: id => dispatch(removeProductFromCart(id)),
   loadSingleProduct: id => dispatch(loadSingleProductRequest(id)),
 });

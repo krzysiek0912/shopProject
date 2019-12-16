@@ -38,6 +38,12 @@ const ChangeCountContainer = styled.div`
 
 const InputCount = styled.input`
   width: 40px;
+  height: 50px;
+  text-align: center;
+  background: #f5f5f5;
+  border: none;
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
 `;
 
 const ButtonRemove = styled.button`
@@ -47,6 +53,14 @@ const ButtonRemove = styled.button`
   color: red;
   border: 0;
   background: none;
+`;
+const ButtonChangeCount = styled.button`
+  background: none;
+  border: none;
+  display: inline-block;
+  font-weight: normal;
+  font-size: 24px;
+  padding: 10px;
 `;
 const ColPrice = styled(Col)`
   font-size: 18px;
@@ -102,13 +116,13 @@ const CartItem = ({ item, currency, setCount, removeFromCart }) => {
       <ColPrice xs={1}>{currency + item.price}</ColPrice>
       <ColAction xs={2}>
         <ChangeCountContainer>
-          <button type="button" onClick={handlerSub}>
+          <ButtonChangeCount type="button" onClick={handlerSub}>
             -
-          </button>{' '}
+          </ButtonChangeCount>{' '}
           <InputCount type="number" onChange={handlerChangeInput} value={count} />
-          <button type="button" onClick={handlerAdd}>
+          <ButtonChangeCount type="button" onClick={handlerAdd}>
             +
-          </button>
+          </ButtonChangeCount>
           szt
         </ChangeCountContainer>
         <ButtonRemove type="button" onClick={handlerRemove}>

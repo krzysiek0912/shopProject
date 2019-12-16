@@ -40,7 +40,7 @@ const initialState = {
     direction: '',
     key: '',
   },
-  currency: '$',
+  currency: 'PLN',
   pagination: {
     productsPerPage: 6,
     presentPage: 1,

@@ -6,13 +6,14 @@ import Spinner from 'react-bootstrap/Spinner';
 import { API_URL } from 'config';
 
 import CartItem from 'components/features/CartItem/CartItem';
-import { getCartList, getArrayOfIds } from 'redux/cartRedux';
+import { getCartList, getCartAmount, getArrayOfIds } from 'redux/cartRedux';
 import { getCurrency } from 'redux/settingRedux';
+import DotPay from 'components/common/DotPay/DotPay';
 
-const CartList = ({ cartIdList, cartList, currency }) => {
+const CartList = ({ cartIdList, cartList, cartAmount, currency }) => {
   const [cart, setCartData] = useState({ items: [] });
-  const [isFetching, setFetching] = useState(false);
 
+  const [isFetching, setFetching] = useState(false);
   useEffect(() => {
     const fetchProducts = async () => {
       setFetching(true);
@@ -45,7 +46,14 @@ const CartList = ({ cartIdList, cartList, currency }) => {
   return (
     <>
       {(isFetching && <Spinner animation="border" />) ||
-        (ItemsList.length === 0 ? <>koszyk jest pusty</> : ItemsList)}
+        (ItemsList.length === 0 ? (
+          <>koszyk jest pusty</>
+        ) : (
+          <>
+            {ItemsList}
+            <DotPay amount={cartAmount} currency={currency} />
+          </>
+        ))}
     </>
   );
 };
@@ -55,15 +63,18 @@ CartList.propTypes = {
     PropTypes.shape({
       _id: PropTypes.string,
       count: PropTypes.number,
+      price: PropTypes.number,
     }),
   ).isRequired,
   cartIdList: PropTypes.arrayOf(PropTypes.string).isRequired,
   currency: PropTypes.string.isRequired,
+  cartAmount: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = state => ({
   currency: getCurrency(state),
   cartList: getCartList(state),
+  cartAmount: getCartAmount(state),
   cartIdList: getArrayOfIds(state),
 });
 
