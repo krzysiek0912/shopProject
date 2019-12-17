@@ -11,6 +11,7 @@ const app = express();
 
 // import routes
 const ProductRoutes = require('./routes/product.routes');
+const PaymentRoutes = require('./routes/payment.routes');
 
 app.use(helmet());
 app.use(cors());
@@ -18,6 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(mongoSanitize());
 app.use('/api', ProductRoutes);
+app.use('/api', PaymentRoutes);
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, '/../client/build')));
