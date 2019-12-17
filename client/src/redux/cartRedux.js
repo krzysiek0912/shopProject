@@ -8,14 +8,9 @@ export const getChk = ({ cart }) => cart.chk;
 export const getCartList = ({ cart }) => cart.cartList;
 export const getArrayOfIds = ({ cart }) => cart.cartIds;
 export const getCartAmount = ({ cart }) => {
-  if (cart.cartList.length < 1) return 0;
-  return cart.cartList.length > 1
-    ? cart.cartList.reduce((previousValue, currentValue) => {
-        const prevAmount = previousValue.count * previousValue.price;
-        const curentAmount = currentValue.count * currentValue.price;
-        return prevAmount + curentAmount;
-      })
-    : cart.cartList[0].count * cart.cartList[0].price;
+  return cart.cartList
+    .map(item => item.count * item.price)
+    .reduce((previousValue, currentValue) => previousValue + currentValue, 0);
 };
 
 // action name creator

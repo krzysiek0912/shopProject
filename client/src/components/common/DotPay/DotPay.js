@@ -19,7 +19,7 @@ const FormContainer = styled.div`
   justify-content: right;
 `;
 const DotPay = ({ chk, setChk, currency, amount, description }) => {
-  const url = `${BASE_URL}/payment`;
+  const url = `${BASE_URL}payment`;
 
   const options = {
     id: '728035',

@@ -5,7 +5,7 @@ import MainLayout from 'components/layout/MainLayout/MainLayout';
 import SingleProduct from 'components/views/SingleProduct/SingleProduct';
 import Home from 'components/views/Home/Home';
 import Cart from 'components/views/Cart/Cart';
-import User from 'components/views/User/User';
+import Payment from 'components/views/Payment/Payment';
 import NoMatch from 'components/views/NoMatch/NoMatch';
 
 import 'globalstyle/index.scss';
@@ -60,7 +60,7 @@ const App = () => {
           <Route exact path="/" component={Home} />
           <Route exact path="/product/:id" component={SingleProduct} />
           <Route exact path="/cart" component={Cart} />
-          <Route exact path="/user" component={User} />
+          <Route exact path="/payment" component={Payment} />
           <Route component={NoMatch} />
         </AnimatedSwitch>
       </Switch>
