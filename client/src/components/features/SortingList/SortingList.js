@@ -10,11 +10,17 @@ import {
   getProductsPerPage,
 } from 'redux/settingRedux';
 import 'globalstyle/__varible.scss';
+import device from 'utils/device';
 
 const List = styled.ul`
   padding: 0 0 35px;
   list-style: none;
   border-bottom: 1px solid #b2b2b2;
+  display: flex;
+  justify-content: space-around;
+  @media ${device.tablet} {
+    display: block;
+  }
 `;
 
 const ListItem = styled.li`

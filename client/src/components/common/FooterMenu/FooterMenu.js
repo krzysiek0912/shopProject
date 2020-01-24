@@ -1,13 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { IonIcon } from 'react-svg-ionicons';
 import { Link, withRouter } from 'react-router-dom';
+import Col from 'react-bootstrap/Col';
 import styled from 'styled-components';
+import device from 'utils/device';
 
-const ColapseContainer = styled.div`
+const MenuFooterContainer = styled(Col)`
   text-align: center;
+  /* padding-bottom: 40px;
+  width: 100%;
+  padding-right: 0;
+  padding-left: 0;
+  @media ${device.mobileM} {
+    width: auto;
+  } */
 `;
 const ListLink = styled.ul`
+  list-style: none;
+  padding: 0;
+
+  @media ${device.mobileM} {
+    display: flex;
+    justify-content: space-between;
+    li:last-of-type a {
+      padding-right: 0;
+    }
+    li:first-of-type a {
+      padding-left: 0;
+    }
+  }
+
   a {
     font-family: 'PT Sans', sans-serif;
     text-transform: uppercase;
@@ -23,9 +45,9 @@ const ListLink = styled.ul`
   }
 `;
 
-const MainMenu = ({ links, location }) => (
-  <ColapseContainer className="collapse navbar-collapse" id="navbarResponsive">
-    <ListLink className="navbar-nav ml-auto">
+const FooterMenu = ({ links, location }) => (
+  <MenuFooterContainer md={9}>
+    <ListLink>
       {links.map(link => (
         <li key={link.id}>
           <Link className={(location.pathname === link.path && 'active') || ''} to={link.path}>
@@ -34,13 +56,10 @@ const MainMenu = ({ links, location }) => (
         </li>
       ))}
     </ListLink>
-    <Link to="/cart">
-      <IonIcon name="cart" size="large" strokeWidth={3} />
-    </Link>
-  </ColapseContainer>
+  </MenuFooterContainer>
 );
 
-MainMenu.propTypes = {
+FooterMenu.propTypes = {
   links: PropTypes.arrayOf(
     PropTypes.shape({
       path: PropTypes.string.isRequired,
@@ -50,4 +69,4 @@ MainMenu.propTypes = {
   location: PropTypes.shape().isRequired,
 };
 
-export default withRouter(props => <MainMenu {...props} />);
+export default withRouter(props => <FooterMenu {...props} />);

@@ -18,9 +18,12 @@ import {
 } from 'redux/settingRedux';
 import Product from 'components/features/Product/Product';
 import Pagination from 'components/common/Pagination/Pagination';
+import device from 'utils/device';
 
 const ContainerProducts = styled(Row)`
-  padding-left: 55px;
+  @media ${device.tablet} {
+    padding-left: 55px;
+  }
 `;
 const HalfColumn = styled.div`
   margin-bottom: 20px;
@@ -54,7 +57,7 @@ class ProductsList extends React.Component {
             </Col>
           ))) ||
           (pending && (
-            <Col>
+            <Col className="text-center">
               <Spinner animation="border" />
             </Col>
           )) || (
@@ -64,7 +67,7 @@ class ProductsList extends React.Component {
           )}
 
         {success && pages > 1 && (
-          <Col>
+          <Col xs={12}>
             <Pagination pages={pages} onPageChange={loadProductsPage} initialPage={presentPage} />
           </Col>
         )}
