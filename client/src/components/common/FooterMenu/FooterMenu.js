@@ -7,13 +7,6 @@ import device from 'utils/device';
 
 const MenuFooterContainer = styled(Col)`
   text-align: center;
-  /* padding-bottom: 40px;
-  width: 100%;
-  padding-right: 0;
-  padding-left: 0;
-  @media ${device.mobileM} {
-    width: auto;
-  } */
 `;
 const ListLink = styled.ul`
   list-style: none;

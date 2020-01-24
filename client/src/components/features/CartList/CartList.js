@@ -67,7 +67,11 @@ CartList.propTypes = {
     }),
   ).isRequired,
   cartIdList: PropTypes.arrayOf(PropTypes.string).isRequired,
-  currency: PropTypes.string.isRequired,
+  currency: PropTypes.shape({
+    currencySite: PropTypes.string,
+    humanCode: PropTypes.string,
+    code: PropTypes.string,
+  }).isRequired,
   cartAmount: PropTypes.number.isRequired,
 };
 

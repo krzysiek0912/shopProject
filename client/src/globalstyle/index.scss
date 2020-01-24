@@ -32,7 +32,11 @@ a:hover {
 .btn-dark {
   background: black;
 }
-
+.content-wrapper{
+  min-height: calc(100vh - 160px);
+  display: flex;
+  align-items: center;
+}
 .route-wrapper {
   position: relative;
 }

@@ -6,10 +6,9 @@ import styled from 'styled-components';
 import device from 'utils/device';
 
 const MainDiv = styled(Container)`
-  padding-bottom: 40px;
-  padding-top: 40px;
+  padding: 40px 0;
   @media ${device.tablet} {
-    padding-top: 120px;
+    padding: 120px 0;
   }
 `;
 const MainLayout = ({ children }) => (

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { getCurrency } from 'redux/settingRedux';
+import Price from 'components/common/Price/Price';
 import ProductTitle from 'components/common/ProductTitle/ProductTitle';
 
 const ProductContainer = styled.div`
@@ -45,8 +46,7 @@ const Product = ({ currency, product }) => {
           <ProductInfo>
             <ProductTitle>{product.name}</ProductTitle>
             <ProductPrice>
-              {currency}
-              {product.price}
+              <Price currency={currency} price={product.price} />
             </ProductPrice>
           </ProductInfo>
         </ProductContainer>
@@ -56,12 +56,12 @@ const Product = ({ currency, product }) => {
   );
 };
 
-Product.defaultProps = {
-  currency: '$',
-};
-
 Product.propTypes = {
-  currency: PropTypes.string,
+  currency: PropTypes.shape({
+    currencySite: PropTypes.string,
+    humanCode: PropTypes.string,
+    code: PropTypes.string,
+  }).isRequired,
   product: PropTypes.shape({
     _id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,

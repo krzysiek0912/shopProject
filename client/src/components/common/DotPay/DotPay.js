@@ -20,11 +20,11 @@ const FormContainer = styled.div`
 `;
 const DotPay = ({ chk, setChk, currency, amount, description }) => {
   const url = `${BASE_URL}payment`;
-
+  const currencyCode = currency.code;
   const options = {
     id: '728035',
     amount,
-    currency,
+    currency: currencyCode,
     description,
     url,
     type: '4',

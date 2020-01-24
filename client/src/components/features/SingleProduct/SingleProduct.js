@@ -11,13 +11,13 @@ import styled from 'styled-components';
 import NoMatch from 'components/views/NoMatch/NoMatch';
 import SubTitle from 'components/common/SubTitle/SubTitle';
 import HtmlBox from 'components/common/HtmlBox/HtmlBox';
+import Price from 'components/common/Price/Price';
 import { getSingleProduct, loadSingleProductRequest } from 'redux/productsRedux';
 import { getCartList, addProductToCart, removeProductFromCart } from 'redux/cartRedux';
 import { getCurrency } from 'redux/settingRedux';
 import { getRequest } from 'redux/requestRedux';
 
 const ProductImgContainer = styled.div`
-  min-height: 500px;
   background: #f5f5f5;
   padding: 50px 0;
   text-align: center;
@@ -106,8 +106,7 @@ class SingleProduct extends React.Component {
                 <ProductInfo>
                   <SubTitle>{singleProduct.name}</SubTitle>
                   <ProductPrice>
-                    {currency}
-                    {singleProduct.price}
+                    <Price currency={currency} price={singleProduct.price} />
                     <HtmlBox>{singleProduct.content}</HtmlBox>
                     {(!inCart && (
                       <Button onClick={handlerAddToCart} variant="dark">
@@ -152,7 +151,11 @@ SingleProduct.propTypes = {
     }),
   }).isRequired,
   id: PropTypes.string.isRequired,
-  currency: PropTypes.string.isRequired,
+  currency: PropTypes.shape({
+    currencySite: PropTypes.string,
+    humanCode: PropTypes.string,
+    code: PropTypes.string,
+  }).isRequired,
   cartList: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,

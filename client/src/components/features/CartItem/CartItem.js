@@ -7,6 +7,7 @@ import Col from 'react-bootstrap/Col';
 import styled from 'styled-components';
 
 import HtmlBox from 'components/common/HtmlBox/HtmlBox';
+import Price from 'components/common/Price/Price';
 import cutText from 'utils/cutText';
 import { getCartList, setCountProductInCart, removeProductFromCart } from 'redux/cartRedux';
 
@@ -113,7 +114,9 @@ const CartItem = ({ item, currency, setCount, removeFromCart }) => {
         </Link>
         <ContentContainer>{cutText(item.content, 150)}</ContentContainer>
       </Col>
-      <ColPrice xs={1}>{currency + item.price}</ColPrice>
+      <ColPrice xs={1}>
+        <Price currency={currency} price={item.price} />
+      </ColPrice>
       <ColAction xs={2}>
         <ChangeCountContainer>
           <ButtonChangeCount type="button" onClick={handlerSub}>
@@ -144,7 +147,11 @@ CartItem.propTypes = {
     price: PropTypes.number,
     count: PropTypes.number,
   }).isRequired,
-  currency: PropTypes.string.isRequired,
+  currency: PropTypes.shape({
+    currencySite: PropTypes.string,
+    humanCode: PropTypes.string,
+    code: PropTypes.string,
+  }).isRequired,
 };
 const mapStateToProps = state => ({
   cartList: getCartList(state),
