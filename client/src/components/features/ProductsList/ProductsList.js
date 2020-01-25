@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import styled from 'styled-components';
 import Row from 'react-bootstrap/Row';
-import Spinner from 'react-bootstrap/Spinner';
 import Alert from 'react-bootstrap/Alert';
 import { Link } from 'react-router-dom';
 import Col from 'react-bootstrap/Col';
@@ -18,6 +17,7 @@ import {
 } from 'redux/settingRedux';
 import Product from 'components/features/Product/Product';
 import Pagination from 'components/common/Pagination/Pagination';
+import PendingSpiner from 'components/common/PendingSpiner/PendingSpiner';
 import device from 'utils/device';
 
 const ContainerProducts = styled(Row)`
@@ -56,11 +56,7 @@ class ProductsList extends React.Component {
               </Link>
             </Col>
           ))) ||
-          (pending && (
-            <Col className="text-center">
-              <Spinner animation="border" />
-            </Col>
-          )) || (
+          (pending && <PendingSpiner />) || (
             <Col>
               <Alert variant="danger"> {error} </Alert>
             </Col>

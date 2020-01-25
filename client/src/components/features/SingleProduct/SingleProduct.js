@@ -2,7 +2,6 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import Spinner from 'react-bootstrap/Spinner';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
@@ -10,6 +9,7 @@ import Button from 'react-bootstrap/Button';
 import styled from 'styled-components';
 
 import NoMatch from 'components/views/NoMatch/NoMatch';
+import PendingSpiner from 'components/common/PendingSpiner/PendingSpiner';
 import SubTitle from 'components/common/SubTitle/SubTitle';
 import HtmlBox from 'components/common/HtmlBox/HtmlBox';
 import Price from 'components/common/Price/Price';
@@ -91,7 +91,7 @@ class SingleProduct extends React.Component {
 
     return (
       <Container>
-        {(pending && <Spinner />) ||
+        {(pending && <PendingSpiner />) ||
           (singleProduct._id && (
             <Row>
               <Col xs={5}>

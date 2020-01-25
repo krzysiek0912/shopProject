@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Spinner from 'react-bootstrap/Spinner';
 import { API_URL } from 'config';
 
 import Price from 'components/common/Price/Price';
 import CartItem from 'components/features/CartItem/CartItem';
+import PendingSpiner from 'components/common/PendingSpiner/PendingSpiner';
 import { getCartList, getCartAmount, getArrayOfIds } from 'redux/cartRedux';
 import { getCurrency } from 'redux/settingRedux';
 import DotPay from 'components/common/DotPay/DotPay';
@@ -55,7 +55,7 @@ const CartList = ({ cartIdList, cartList, cartAmount, currency }) => {
 
   return (
     <>
-      {(isFetching && <Spinner animation="border" />) ||
+      {(isFetching && <PendingSpiner />) ||
         (ItemsList.length === 0 ? (
           <>koszyk jest pusty</>
         ) : (
