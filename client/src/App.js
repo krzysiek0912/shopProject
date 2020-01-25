@@ -5,6 +5,7 @@ import MainLayout from 'components/layout/MainLayout/MainLayout';
 import SingleProduct from 'components/views/SingleProduct/SingleProduct';
 import Home from 'components/views/Home/Home';
 import Cart from 'components/views/Cart/Cart';
+import Regulations from 'components/views/Regulations/Regulations';
 import Payment from 'components/views/Payment/Payment';
 import NoMatch from 'components/views/NoMatch/NoMatch';
 
@@ -59,6 +60,7 @@ const App = () => {
         >
           <Route exact path="/" component={Home} />
           <Route exact path="/product/:id" component={SingleProduct} />
+          <Route exact path="/regulations" component={Regulations} />
           <Route exact path="/cart" component={Cart} />
           <Route exact path="/payment" component={Payment} />
           <Route component={NoMatch} />

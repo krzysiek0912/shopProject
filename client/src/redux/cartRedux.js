@@ -7,6 +7,11 @@ export const getValue = ({ cart }) => cart.value;
 export const getChk = ({ cart }) => cart.chk;
 export const getCartList = ({ cart }) => cart.cartList;
 export const getArrayOfIds = ({ cart }) => cart.cartIds;
+export const getCartCount = ({ cart }) => {
+  return cart.cartList
+    .map(item => item.count)
+    .reduce((previousValue, currentValue) => previousValue + currentValue, 0);
+};
 export const getCartAmount = ({ cart }) => {
   return cart.cartList
     .map(item => item.count * item.price)

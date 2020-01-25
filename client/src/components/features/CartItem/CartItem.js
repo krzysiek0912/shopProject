@@ -9,6 +9,7 @@ import styled from 'styled-components';
 import HtmlBox from 'components/common/HtmlBox/HtmlBox';
 import Price from 'components/common/Price/Price';
 import cutText from 'utils/cutText';
+import device from 'utils/device';
 import { getCartList, setCountProductInCart, removeProductFromCart } from 'redux/cartRedux';
 
 const CartImgContainer = styled.div`
@@ -33,8 +34,11 @@ const ContentContainer = styled(HtmlBox)`
 const ChangeCountContainer = styled.div`
   display: flex;
   padding-bottom: 10px;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
+  @media ${device.tablet} {
+    justify-content: flex-end;
+  }
 `;
 
 const InputCount = styled.input`
@@ -50,10 +54,13 @@ const InputCount = styled.input`
 const ButtonRemove = styled.button`
   font-size: 14px;
   width: 100%;
-  text-align: right;
+  text-align: center;
   color: red;
   border: 0;
   background: none;
+  @media ${device.tablet} {
+    text-align: right;
+  }
 `;
 const ButtonChangeCount = styled.button`
   background: none;
@@ -66,10 +73,11 @@ const ButtonChangeCount = styled.button`
 const ColPrice = styled(Col)`
   font-size: 18px;
   opacity: 0.7;
-  margin-top: 35px;
+  align-self: center;
+  text-align: center;
 `;
 const ColAction = styled(Col)`
-  margin-top: 60px;
+  margin-top: 35px;
 `;
 
 const CartItem = ({ item, currency, setCount, removeFromCart }) => {
@@ -103,35 +111,39 @@ const CartItem = ({ item, currency, setCount, removeFromCart }) => {
 
   return (
     <StyledRow>
-      <Col xs={2}>
+      <Col sm={6} md={2}>
         <CartImgContainer>
           <img src={process.env.PUBLIC_URL + item.img} alt="" />
         </CartImgContainer>
       </Col>
-      <Col xs={{ span: 6, offset: 1 }}>
-        <Link to={`${process.env.PUBLIC_URL}/product/${item._id}`}>
-          <CartProductTitle>{item.name}</CartProductTitle>
-        </Link>
-        <ContentContainer>{cutText(item.content, 150)}</ContentContainer>
+      <Col sm={6} md={10}>
+        <Row>
+          <Col md={7} lg={{ span: 7, offset: 1 }}>
+            <Link to={`${process.env.PUBLIC_URL}/product/${item._id}`}>
+              <CartProductTitle>{item.name}</CartProductTitle>
+            </Link>
+            <ContentContainer>{cutText(item.content, 150)}</ContentContainer>
+          </Col>
+          <ColPrice xs={6} md={2}>
+            <Price currency={currency} price={item.price} />
+          </ColPrice>
+          <ColAction xs={6} md={3} lg={2}>
+            <ChangeCountContainer>
+              <ButtonChangeCount type="button" onClick={handlerSub}>
+                -
+              </ButtonChangeCount>{' '}
+              <InputCount type="number" onChange={handlerChangeInput} value={count} />
+              <ButtonChangeCount type="button" onClick={handlerAdd}>
+                +
+              </ButtonChangeCount>
+              szt
+            </ChangeCountContainer>
+            <ButtonRemove type="button" onClick={handlerRemove}>
+              usuń produkt
+            </ButtonRemove>
+          </ColAction>
+        </Row>
       </Col>
-      <ColPrice xs={1}>
-        <Price currency={currency} price={item.price} />
-      </ColPrice>
-      <ColAction xs={2}>
-        <ChangeCountContainer>
-          <ButtonChangeCount type="button" onClick={handlerSub}>
-            -
-          </ButtonChangeCount>{' '}
-          <InputCount type="number" onChange={handlerChangeInput} value={count} />
-          <ButtonChangeCount type="button" onClick={handlerAdd}>
-            +
-          </ButtonChangeCount>
-          szt
-        </ChangeCountContainer>
-        <ButtonRemove type="button" onClick={handlerRemove}>
-          usuń produkt
-        </ButtonRemove>
-      </ColAction>
     </StyledRow>
   );
 };

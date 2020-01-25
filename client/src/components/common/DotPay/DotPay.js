@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { BASE_URL } from 'config';
 import { setChkRequest, getChk } from 'redux/cartRedux';
+import device from 'utils/device';
 
 const ButtonPay = styled.button`
   border: 0;
@@ -16,7 +17,10 @@ const ButtonPay = styled.button`
 `;
 const FormContainer = styled.div`
   display: flex;
-  justify-content: right;
+  justify-content: center;
+  @media ${device.tablet} {
+    justify-content: right;
+  }
 `;
 const DotPay = ({ chk, setChk, currency, amount, description }) => {
   const url = `${BASE_URL}payment`;
@@ -69,7 +73,11 @@ DotPay.defaultProps = {
 DotPay.propTypes = {
   setChk: PropTypes.func.isRequired,
   chk: PropTypes.string.isRequired,
-  currency: PropTypes.string.isRequired,
+  currency: PropTypes.shape({
+    currencySite: PropTypes.string,
+    humanCode: PropTypes.string,
+    code: PropTypes.string,
+  }).isRequired,
   amount: PropTypes.number.isRequired,
   description: PropTypes.string,
 };

@@ -14,6 +14,6 @@ Price.propTypes = {
     humanCode: PropTypes.string,
     code: PropTypes.string,
   }).isRequired,
-  price: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
 };
 export default Price;
