@@ -6,7 +6,8 @@
     "start": "cd server && yarn start",
     "startdev": "npm-run-all -p -l start:*",
     "start:server": "cd server && yarn start",
-    "start:client": "cd client && yarn start"
+    "start:client": "cd client && yarn start",
+    "buildapp": "cd client && yarn build"
   },
   "browserslist": {
     "production": [
