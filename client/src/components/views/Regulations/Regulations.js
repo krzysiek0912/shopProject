@@ -1,10 +1,11 @@
 import React from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
 import Title from 'components/common/Title/Title';
 
 const Regulations = () => (
-  <>
+  <Container>
     <Title>Regulamin Sklepu Internetowego</Title>
     <Row>
       <Col>
@@ -45,7 +46,7 @@ const Regulations = () => (
         </p>
       </Col>
     </Row>
-  </>
+  </Container>
 );
 
 export default Regulations;

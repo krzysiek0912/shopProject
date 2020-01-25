@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import Container from 'react-bootstrap/Container';
 
 const Payment = ({ location }) => {
   const searchParams = new URLSearchParams(location.search.slice(1));
@@ -6,10 +7,10 @@ const Payment = ({ location }) => {
 
   useEffect(() => {
     // Zaktualizuj tytuł dokumentu korzystając z interfejsu API przeglądarki
-    document.title = `Kliknięto  razy`;
+    document.title = `Płatność sukcess`;
   });
   if (status === 'OK') return <div>Payment Succes</div>;
-  return <div>Payment Error</div>;
+  return <Container>Payment Error</Container>;
 };
 
 export default Payment;

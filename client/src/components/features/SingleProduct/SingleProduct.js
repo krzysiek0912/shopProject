@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import Spinner from 'react-bootstrap/Spinner';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import styled from 'styled-components';
 
@@ -89,7 +90,7 @@ class SingleProduct extends React.Component {
     const { pending } = request.products;
 
     return (
-      <div>
+      <Container>
         {(pending && <Spinner />) ||
           (singleProduct._id && (
             <Row>
@@ -122,7 +123,7 @@ class SingleProduct extends React.Component {
               </Col>
             </Row>
           )) || <NoMatch />}
-      </div>
+      </Container>
     );
   }
 }

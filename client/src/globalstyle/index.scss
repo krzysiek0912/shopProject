@@ -41,7 +41,9 @@ p {
   min-height: calc(100vh - 400px);
   display: flex;
 }
-
+.route-wrapper > div {
+  width: 100%;
+}
 .route-wrapper > div:nth-of-type(2) {
   position: absolute;
   width: 100%;

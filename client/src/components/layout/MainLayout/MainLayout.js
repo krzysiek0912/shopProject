@@ -1,11 +1,10 @@
 import React from 'react';
-import Container from 'react-bootstrap/Container';
 import Header from 'components/layout/Header/Header';
 import Footer from 'components/layout/Footer/Footer';
 import styled from 'styled-components';
 import device from 'utils/device';
 
-const MainDiv = styled(Container)`
+const MainDiv = styled.div`
   padding: 40px 0;
   @media ${device.tablet} {
     padding: 120px 0;
