@@ -2,13 +2,23 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import Spinner from 'react-bootstrap/Spinner';
 import { API_URL } from 'config';
 
+import Price from 'components/common/Price/Price';
 import CartItem from 'components/features/CartItem/CartItem';
 import { getCartList, getCartAmount, getArrayOfIds } from 'redux/cartRedux';
 import { getCurrency } from 'redux/settingRedux';
 import DotPay from 'components/common/DotPay/DotPay';
+
+const SummaryContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-transform: uppercase;
+  font-weight: bold;
+`;
 
 const CartList = ({ cartIdList, cartList, cartAmount, currency }) => {
   const [cart, setCartData] = useState({ items: [] });
@@ -51,6 +61,12 @@ const CartList = ({ cartIdList, cartList, cartAmount, currency }) => {
         ) : (
           <>
             {ItemsList}
+            <SummaryContainer>
+              <input type="text" placeholder="KOD PROMOCYJNY" />
+              <div>
+                Do zapłaty <Price currency={currency} price={cartAmount} />
+              </div>
+            </SummaryContainer>
             <DotPay amount={cartAmount} currency={currency} />
           </>
         ))}
