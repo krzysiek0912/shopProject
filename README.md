@@ -1,6 +1,7 @@
 # shopProject
 
-This project Demo : [Shop Project App](https://shopprojectkb.herokuapp.com/)
+This project Demo : [Shop Project App](https://shopprojectkb.herokuapp.com/) <br />
+https://github.com/krzysiek0912/shopProject/tree/ea14efdf5b51665167a9bbcea10a496000c9875b
 
 ## Before run
 
