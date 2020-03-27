@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "installall": "yarn install && npm-run-all -p -l installall:*",
+    "installall:client": "cd client && yarn install",
+    "installall:server": "cd server && yarn install",
     "start": "cd server && yarn start",
     "startdev": "npm-run-all -p -l start:*",
     "start:server": "cd server && yarn start",
@@ -33,7 +36,6 @@
     "npm-run-all": "^4.1.5"
   },
   "devDependencies": {
-    "babel-eslint": "^10.0.3",
     "eslint": "6.1.0",
     "eslint-config-airbnb": "18.0.1",
     "eslint-config-prettier": "^6.4.0",
