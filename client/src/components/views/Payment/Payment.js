@@ -1,26 +1,12 @@
-import React, { useEffect } from 'react';
 import Container from 'react-bootstrap/Container';
-import { connect } from 'react-redux';
-import { removeAllProductFromCart } from 'redux/cartRedux';
+import React from 'react';
+import PaymentSucces from 'components/common/PaymentSucces/PaymentSucces';
 
-const Payment = ({ location, clearCart }) => {
-  const searchParams = new URLSearchParams(location.search.slice(1));
-  const status = searchParams.get('status');
+const Payment = ({ location }) => {
+    const searchParams = new URLSearchParams(location.search.slice(1));
+    const status = searchParams.get('status');
 
-  useEffect(() => {
-    clearCart();
-    // Zaktualizuj tytuł dokumentu korzystając z interfejsu API przeglądarki
-    document.title = `Płatność przyjęta`;
-  });
-  if (status === 'OK') return <div>Payment Succes</div>;
-  return <Container>Payment Error</Container>;
+    return <Container>{status.toLowerCase() === 'ok' ? <PaymentSucces /> : 'Error'}</Container>;
 };
 
-const mapDispatchToProps = dispatch => ({
-  clearCart: () => dispatch(removeAllProductFromCart()),
-});
-
-export default connect(
-  null,
-  mapDispatchToProps,
-)(Payment);
+export default Payment;
