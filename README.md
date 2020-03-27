@@ -8,9 +8,11 @@ https://github.com/krzysiek0912/shopProject/tree/ea14efdf5b51665167a9bbcea10a496
 Before run project install dependencies. <br />
 In the project directory run command:
 
-### `yarn install`
+### `yarn installall`
 
-if not work replace command in server and client directory. <br />
+if not work run this command in server and client directory. <br />
+
+### `yarn install`
 
 You must rename .env.example to .env and edit file to yours settings
 
