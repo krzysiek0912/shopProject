@@ -24,12 +24,14 @@ const createActionName = name => `app/${reducerName}/${name}`;
 
 export const ADD_TO_CART = createActionName('ADD_TO_CART');
 export const REMOVE_FROM_CART = createActionName('REMOVE_FROM_CART');
+export const REMOVE_ALL_FROM_CART = createActionName('REMOVE_ALL_FROM_CART');
 export const SET_COUNT_PRODUCT = createActionName('SET_COUNT_PRODUCT');
 export const SET_CHK = createActionName('SET_CHK');
 
 /* ACTIONS */
 export const addProductToCart = payload => ({ payload, type: ADD_TO_CART });
 export const removeProductFromCart = payload => ({ payload, type: REMOVE_FROM_CART });
+export const removeAllProductFromCart = payload => ({ payload, type: REMOVE_ALL_FROM_CART });
 export const setCountProductInCart = payload => ({ payload, type: SET_COUNT_PRODUCT });
 export const setChk = payload => ({ payload, type: SET_CHK });
 
@@ -85,6 +87,12 @@ export default function reducer(statePart = initialState, action = {}) {
         ...statePart,
         cartList: [...statePart.cartList.filter(element => !(element._id === action.payload))],
         cartIds: [...statePart.cartIds.filter(element => !(element === action.payload))],
+      };
+    case REMOVE_ALL_FROM_CART:
+      return {
+        ...statePart,
+        cartList: [],
+        cartIds: [],
       };
     case SET_COUNT_PRODUCT:
       return {
