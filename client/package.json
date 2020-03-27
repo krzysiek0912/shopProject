@@ -21,7 +21,6 @@
     "styled-components": "^4.4.1"
   },
   "devDependencies": {
-    "babel-eslint": "^10.1.0",
     "node-sass": "^4.13.0"
   },
   "scripts": {

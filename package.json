@@ -7,10 +7,10 @@
     "installall:client": "cd client && yarn install",
     "installall:server": "cd server && yarn install",
     "start": "cd server && yarn start",
-    "startdev": "npm-run-all -p -l start:*",
-    "start:server": "cd server && yarn start",
-    "start:client": "cd client && yarn start",
-    "buildapp": "cd client && yarn build"
+    "startdev": "npm-run-all -s -l startdev:*",
+    "startdev:client": "cd client && yarn start",
+    "startdev:server": "cd server && yarn start",
+    "buildclient": "cd client && yarn build"
   },
   "browserslist": {
     "production": [
